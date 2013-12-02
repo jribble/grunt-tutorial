@@ -56,7 +56,6 @@ module.exports = function(grunt){
 
 		//compile our templates so that they can be inlined
 		ngtemplates:{
-			options:{base:'app'},
 			app:{
 				src:['templates/**/*.html'],
 				dest:'build/temp/templates.js'
@@ -84,6 +83,17 @@ module.exports = function(grunt){
 					'build/index.html': 'build/index.html'
 				}
 			}
+		},
+		cssmin: {
+		  add_banner: {
+		    options: {
+		      banner: '/* RWX MINIFIED CSS */',
+		      keepSpecialComments:0
+		    },
+		    files: {
+		      'build/app.css': ['build/app.css']
+		    }
+		  }
 		},
 
 		//Regarde Task
@@ -127,6 +137,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-clear');
@@ -139,14 +150,10 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		Added htmlmin
+		Added cssmin
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
-			- THE END
-				things we didn't cover
-					- compressing images (very simple)
-					- jshint (very simple)
-					- mocha/gruntacular integration (entire training for this)
+			
 
 
 		1 - clean:build - cleans out the build directory
@@ -159,7 +166,7 @@ module.exports = function(grunt){
 		8 - htmlmin - MINIFY OUR HTML, SO THAT IT IS AS COMPACT AS POSSIBLE
 		9 - clean:tempbuild - remove temp build dir
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:tempbuild']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'cssmin', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
