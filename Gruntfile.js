@@ -95,6 +95,15 @@ module.exports = function(grunt){
 		    }
 		  }
 		},
+		imagemin: {                          // Task
+			dynamic: {                         // Another target
+			  files: [{
+			    expand: true,                      // Enable dynamic expansion
+			    src: ['img/**/*.{png,jpg,gif}'],   // Actual patterns to match
+			    dest: 'build/'                     // Destination path prefix
+			  }]
+			}
+		},
 
 		//Regarde Task
 		regarde:{
@@ -138,6 +147,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-clear');
@@ -150,7 +160,7 @@ module.exports = function(grunt){
 
 	//OUR TASKS
 	/*
-		Added cssmin
+		Added imagemin
 			- run 'grunt build'
 			- checkout the build dir afterwards, see the index.html
 			
@@ -164,9 +174,11 @@ module.exports = function(grunt){
 		6 - uglify - minifiy and obfuscate our js
 		7 - htmlrefs - remove/replace specified html pieces during the build
 		8 - htmlmin - MINIFY OUR HTML, SO THAT IT IS AS COMPACT AS POSSIBLE
+		8 - cssmin - MINIFY OUR CSS, SO THAT IT IS AS COMPACT AS POSSIBLE
+		8 - imagemin - MINIFY OUR IMAGES, SO THAT IT IS AS COMPACT AS POSSIBLE
 		9 - clean:tempbuild - remove temp build dir
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'cssmin', 'clean:tempbuild']);
+	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'cssmin', 'imagemin', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
