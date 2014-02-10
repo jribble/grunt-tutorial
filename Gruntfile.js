@@ -132,7 +132,13 @@ module.exports = function(grunt){
 	          }
 	        }
 	      }
-	    }
+	    },
+
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
+            }
+        }
 	});
 
 	//Live reload tasks
@@ -156,6 +162,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('gruntacular');
 	grunt.loadNpmTasks('grunt-release');
 	grunt.loadNpmTasks('grunt-ngmin');
+    grunt.loadNpmTasks('grunt-karma');
 
 
 	//OUR TASKS
