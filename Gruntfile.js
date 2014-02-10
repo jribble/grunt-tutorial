@@ -137,6 +137,11 @@ module.exports = function(grunt){
         karma: {
             unit: {
                 configFile: 'karma.conf.js'
+            },
+            continuous: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
             }
         }
 	});
@@ -185,7 +190,7 @@ module.exports = function(grunt){
 		8 - imagemin - MINIFY OUR IMAGES, SO THAT IT IS AS COMPACT AS POSSIBLE
 		9 - clean:tempbuild - remove temp build dir
 	*/
-	grunt.registerTask('build',['clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'cssmin', 'imagemin', 'clean:tempbuild']);
+	grunt.registerTask('build',['karma:continuous', 'clean:build', 'stylus', 'ngtemplates', 'ngmin:app', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'cssmin', 'imagemin', 'clean:tempbuild']);
 	grunt.registerTask('dev',['livereload-start', 'connect', 'regarde']);
 
 }
