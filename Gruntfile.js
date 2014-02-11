@@ -142,6 +142,17 @@ module.exports = function(grunt){
                 configFile: 'karma.conf.js',
                 singleRun: true,
                 browsers: ['PhantomJS']
+            },
+            coverage: {
+                configFile: 'karma.conf.js',
+                reporters: ['progress', 'coverage'],
+                preprocessors: {
+                    'js/*.js': ['coverage']
+                },
+                coverageReporter: {
+                    type: 'html',
+                    dir: 'coverage/'
+                }
             }
         }
 	});
